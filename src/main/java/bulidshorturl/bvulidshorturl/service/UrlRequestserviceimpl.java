@@ -23,7 +23,7 @@ public class UrlRequestserviceimpl implements UrlRequestservice{
             // Handle case where the URL doesn't exist
             return ResponseEntity.notFound().build();
         }
-        if(urlMapping.get().getExpirationTime().getMinute()>5){
+        if(urlMapping.get().getExpirationTime().getMinute()-LocalDateTime.now().getMinute()>5){
             urlMappindao.delete(urlMapping.get());
             return ResponseEntity.notFound().build();
         }

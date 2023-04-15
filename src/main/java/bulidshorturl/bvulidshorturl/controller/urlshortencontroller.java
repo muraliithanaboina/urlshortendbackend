@@ -4,6 +4,7 @@ import bulidshorturl.bvulidshorturl.models.UrlMapping;
 import bulidshorturl.bvulidshorturl.models.UrlRequest;
 import bulidshorturl.bvulidshorturl.service.urlmappinservice;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "http://localhost:3000/")
@@ -15,7 +16,7 @@ public class urlshortencontroller {
 
 
      @PostMapping("/shorten")
-       public UrlMapping shortenUrl(@RequestBody UrlRequest urlRequest) {
+       public UrlMapping shortenUrl(@Validated @RequestBody UrlRequest urlRequest) {
 
 
           return urlmappinservice.shortenUrl(urlRequest);
