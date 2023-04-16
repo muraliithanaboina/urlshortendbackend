@@ -18,7 +18,6 @@ public class UrlMapping  {
     @Id
     @GeneratedValue
     private Long ID;
-    @Column(unique = true)
     private String originalUrl;
     @NonNull
     private String shortenedUrl;

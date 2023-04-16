@@ -17,23 +17,16 @@ public class UrlRequestserviceimpl implements UrlRequestservice{
     @Autowired
     private UrlMappindao urlMappindao;
     @Override
-    public ResponseEntity<Void> redirect_To_Original_Url( String shortUrl) {
+    public String redirect_To_Original_Url( String shortUrl) {
       Optional<UrlMapping>urlMapping= urlMappindao.findbyurl(shortUrl);
-        if (urlMapping == null) {
-            // Handle case where the URL doesn't exist
-            return ResponseEntity.notFound().build();
-        }
-        if(urlMapping.get().getExpirationTime().getMinute()-LocalDateTime.now().getMinute()>5){
+        if(LocalDateTime.now().getMinute()-urlMapping.get().getExpirationTime().getMinute()>5){
             urlMappindao.delete(urlMapping.get());
-            return ResponseEntity.notFound().build();
+            return "not found";
         }
 
-
-
-        // Redirect the user to the original URL
-        return ResponseEntity.status(HttpStatus.MOVED_PERMANENTLY)
-                .header(HttpHeaders.LOCATION, urlMapping.get().getOriginalUrl())
-                .build();
+        else {// Redirect the user to the original URL
+            return urlMapping.get().getOriginalUrl();
+        }
     }
 
 

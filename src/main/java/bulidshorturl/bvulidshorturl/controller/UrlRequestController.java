@@ -7,7 +7,7 @@ import bulidshorturl.bvulidshorturl.service.urlmappinservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-@CrossOrigin(origins = "http://localhost:3000/")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("api/v1")
 public class UrlRequestController {
@@ -16,7 +16,7 @@ public class UrlRequestController {
 
 
     @GetMapping("/{shortUrl}")
-    public ResponseEntity<Void> redirectToOriginalUrl(@PathVariable String shortUrl) {
+    public String redirectToOriginalUrl(@PathVariable String shortUrl) {
 
   return  urlRequestservice.redirect_To_Original_Url(shortUrl);
     }
