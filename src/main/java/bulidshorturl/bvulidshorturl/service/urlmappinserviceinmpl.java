@@ -14,6 +14,8 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.util.Date;
+
 @Service
 public class urlmappinserviceinmpl implements urlmappinservice {
     @Autowired
@@ -26,7 +28,7 @@ public class urlmappinserviceinmpl implements urlmappinservice {
 
             String hash = DigestUtils.sha256Hex(urlRequest.getOriginalUrl());
             String shortenedUrl = Base64.encodeBase64URLSafeString(hash.getBytes()).substring(0, 8);
-            UrlMapping urlMapping = UrlMapping.builder().expirationTime(LocalDateTime.now())
+            UrlMapping urlMapping = UrlMapping.builder().expirationTime(new Date().getTime())
                     .shortenedUrl(shortenedUrl)
                     .originalUrl(urlRequest.getOriginalUrl()).build();
             return urlMappindao.save(urlMapping);

@@ -8,6 +8,8 @@ import lombok.*;
 import org.springframework.http.HttpStatusCode;
 
 import java.time.LocalDateTime;
+import java.util.Date;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,7 +24,7 @@ public class UrlMapping  {
     private String originalUrl;
     @NonNull
     private String shortenedUrl;
-    private LocalDateTime expirationTime;
+    private Long expirationTime;
 
 
 }

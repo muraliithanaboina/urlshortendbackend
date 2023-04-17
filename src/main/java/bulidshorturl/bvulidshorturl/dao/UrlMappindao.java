@@ -11,6 +11,6 @@ import java.util.Optional;
 public interface UrlMappindao extends JpaRepository<UrlMapping,Long> {
     @Query(value = "select * from url_mapping  where shortened_url=?",nativeQuery = true)
      Optional<UrlMapping> findbyurl(String shortendurl);
-     @Query(value = " select * from url_mapping  where expiration_Time=?",nativeQuery = true)
-    List<UrlMapping> findByCreationTimeBefore(Date expirationTime);
+     @Query(value = " SELECT * FROM url_mapping WHERE expiration_time < ?1",nativeQuery = true)
+    List<UrlMapping> findByCreationTimeBefore(Long expirationTime);
 }

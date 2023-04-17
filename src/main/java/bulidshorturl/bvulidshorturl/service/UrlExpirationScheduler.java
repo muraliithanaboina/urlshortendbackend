@@ -34,17 +34,17 @@ public class UrlExpirationScheduler {
         public void run() {
             Date now = new Date();
             long expirationTimeMillis = now.getTime() - (5 * 60 * 1000); // 5 minutes ago
-            Date expirationTime = new Date(expirationTimeMillis);
+
 
             // Query the database for expired URLs
-            List<UrlMapping> expiredUrls = urlMappindao.findByCreationTimeBefore(expirationTime);
+            List<UrlMapping> expiredUrls = urlMappindao.findByCreationTimeBefore(expirationTimeMillis);
 
             // Remove the expired URLs from the database
-            if (!expiredUrls.isEmpty()) {
+
                 for (UrlMapping urlMapping : expiredUrls) {
                     urlMappindao.delete(urlMapping);
                 }
-            }
+
         }
     }
 }
