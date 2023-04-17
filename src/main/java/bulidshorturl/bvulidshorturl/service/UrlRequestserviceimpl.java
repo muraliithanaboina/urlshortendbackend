@@ -19,16 +19,13 @@ public class UrlRequestserviceimpl implements UrlRequestservice{
     @Override
     public String redirect_To_Original_Url( String shortUrl) {
       Optional<UrlMapping>urlMapping= urlMappindao.findbyurl(shortUrl);
-        if(LocalDateTime.now().getMinute()-urlMapping.get().getExpirationTime().getMinute()>5){
-            urlMappindao.delete(urlMapping.get());
-            return "not found";
-        }
 
-        else {// Redirect the user to the original URL
+
+        // Redirect the user to the original URL
             return urlMapping.get().getOriginalUrl();
         }
     }
 
 
-    }
+
 
